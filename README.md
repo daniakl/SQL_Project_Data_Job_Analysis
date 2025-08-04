@@ -13,9 +13,14 @@ The questions I wanted to answer through my SQL queries were:
 5. What are the most optimal skills to learn for a data analyst looking to maximize job market value?
 # Tools I used
 In this project, I used a variety of tools to conduct my analysis and to add visualizations to some part:
--**SQL**(Structured Query Language): Used to interact with the database, extract insights, and answer my key questions through queries.
--**PostgreSQL**: As the database management system, PostgreSQL allowed me to store, query, and manipulate the job posting data.
--**Visual Studio Code **(VS Code):This open-source administration and development platform helped me manage the database and execute SQL queries.
+
+1.**SQL**(Structured Query Language): Used to interact with the database, extract insights, and answer my key questions through queries.
+
+2.***PostgreSQL**: As the database management system, PostgreSQL allowed me to store, query, and manipulate the job posting data.
+
+3.**Visual Studio Code**(VS Code):This open-source administration and development platform helped me manage the database and execute SQL queries.
+
+
 # The Analysis
 Each query for this project was done with the objective of finding specific aspects of the data analyst job market. Here is the approach for each question:
 ### 1. Top Paying Data Analyst Jobs 
@@ -31,10 +36,173 @@ SELECT
 
 FROM job_postings_fact
 WHERE 
-    job_title = 'Data Analyst'
+    job_title_short = 'Data Analyst'
    AND salary_year_avg IS NOT NULL
    AND job_location = 'Anywhere'
 ORDER BY salary_year_avg DESC
 LIMIT 10;
 ```
+### 2. Skills for top paying jobs
+ **BLABLABLA**
+```SQL
+WITH top_paying_jobs AS (
+    SELECT 
+        job_id,
+        job_title,
+        salary_year_avg
+    FROM job_postings_fact
+    WHERE 
+        job_title_short = 'Data Analyst' 
+        AND job_location = 'Anywhere'
+        AND salary_year_avg IS NOT NULL 
+    ORDER BY salary_year_avg DESC
+    LIMIT 10      
+)
+
+SELECT
+    top_paying_jobs.job_id, 
+    job_title, 
+    salary_year_avg,
+    skills_dim.skills
+FROM top_paying_jobs   
+INNER JOIN skills_job_dim ON top_paying_jobs.job_id=skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+/* This join allows us to list the skills associated with each of these top-paying jobs. 
+We only want to include jobs where there’s a skill associated with it. */
+ORDER BY 
+    salary_year_avg DESC;
+```
+
+### 3. In-Demand Skills for Data Analysts
+ **BLABLABLA**
+```SQL
+SELECT
+   skills_dim.skills,
+   COUNT(skills_job_dim.job_id) AS demand_count
+FROM job_postings_fact
+INNER JOIN 
+    skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN
+     skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
+WHERE
+    job_postings_fact.job_title_short= 'Data Analyst'
+GROUP BY
+    skills_dim.skills
+ORDER BY     
+demand_count DESC
+LIMIT 5;
+```
+### Here are the Top 5 most demanded skills
+
+| Skill | Demand Count |
+|-------|--------------|
+| SQL | 92,628 |
+| Excel | 67,031 |
+| Python | 57,326 |
+| Tableau | 46,554 |
+| Power BI | 39,468 |
+
+### 4. Skills based on Salary
+**BLABLABLA**
+```SQL
+SELECT
+    skills_dim.skills AS skill,
+   ROUND(avg(job_postings_fact.salary_year_avg)) AS avg_salary
+FROM job_postings_fact
+    INNER JOIN 
+        skills_job_dim ON job_postings_fact.job_id=skills_job_dim.job_id
+    INNER JOIN 
+        skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
+WHERE 
+    job_postings_fact.job_title_short='Data Analyst'
+    AND job_postings_fact.salary_year_avg IS NOT NULL
+GROUP BY
+    skill
+ORDER BY
+    avg_salary DESC
+Limit 10 ;
+```
+### Top 10 Highest Paying Skills
+
+| Rank | Skill | Average Salary |
+|------|-------|----------------|
+| 1 | SVN | $400,000 |
+| 2 | Solidity | $179,000 |
+| 3 | Couchbase | $160,515 |
+| 4 | DataRobot | $155,486 |
+| 5 | Golang | $155,000 |
+| 6 | MXNet | $149,000 |
+| 7 | dplyr | $147,633 |
+| 8 | VMware | $147,500 |
+| 9 | Terraform | $146,734 |
+| 10 | Twilio | $138,500 |
+
+### 5. Most Optimal Skills to Learn
+```SQL
+WITH skills_demand AS (
+    SELECT
+         skills_dim.skill_id,
+         skills_dim.skills,
+         COUNT(skills_job_dim.job_id) AS demand_count
+FROM 
+    job_postings_fact
+    INNER JOIN   
+        skills_job_dim ON job_postings_fact.job_id=skills_job_dim.job_id
+    INNER JOIN
+        skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
+WHERE
+    job_postings_fact.job_title_short = 'Data Analyst'  
+    AND job_postings_fact.salary_year_avg IS NOT NULL
+    AND job_postings_fact.job_work_from_home = True  
+GROUP BY
+    skills_dim.skill_id     
+),
+
+average_salary AS (
+    SELECT
+    skills_job_dim.skill_id,
+   ROUND(avg(job_postings_fact.salary_year_avg)) AS avg_salary
+FROM job_postings_fact
+    INNER JOIN 
+        skills_job_dim ON job_postings_fact.job_id=skills_job_dim.job_id
+    INNER JOIN 
+        skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
+WHERE 
+    job_postings_fact.job_title_short='Data Analyst'
+    AND job_postings_fact.salary_year_avg IS NOT NULL
+    AND job_postings_fact.job_work_from_home = TRUE
+GROUP BY
+    skills_job_dim.skill_id
+)
+
+SELECT
+    skills_demand.skills,
+    skills_demand.demand_count,
+    average_salary.avg_salary
+FROM
+    skills_demand
+    INNER JOIN 
+        average_salary ON skills_demand.skill_id=average_salary.skill_id
+ORDER BY
+    demand_count DESC,
+    avg_salary DESC
+LIMIT 10;   
+```
+# Optimal Skills - High Demand & High Salary
+
+| Rank | Skill | Demand Count | Average Salary |
+|------|-------|--------------|----------------|
+| 1 | SQL | 398 | $97,237 |
+| 2 | Excel | 256 | $87,288 |
+| 3 | Python | 236 | $101,397 |
+| 4 | Tableau | 230 | $99,288 |
+| 5 | R | 148 | $100,499 |
+| 6 | Power BI | 110 | $97,431 |
+| 7 | SAS | 63 | $98,902 |
+| 8 | PowerPoint | 58 | $88,701 |
+| 9 | Looker | 49 | $103,795 |
+
+# What I learned
+# Insights
+# Conclusion
 
