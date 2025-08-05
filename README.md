@@ -1,30 +1,39 @@
 TO do: update content later
 
 # Introduction
-In this SQL portfolio project, the analysis aimed towards getting a better understanding of the job market by focusing on job postings for Data Analysts. This project explores the top-paying jobs, the most in-demand skills and observes the correlation between the high in-demand skills and the average salary linked to them specifically for the Data analytics field. 
+
+In this SQL portfolio project, the analysis aimed towards getting a better understanding of the job market by focusing on job postings for Data Analysts. This project explores the top-paying jobs, the most in-demand skills and observes the correlation between the high in-demand skills and the average salary linked to them specifically for the Data analytics field.
+
 # Background
-This project was a part of an SQL online class seeking to find a deeper understanding of the Data Analyst job requirements and benefits. It created a better understanding of the most in-demand skills and the pay related to said skills making my future job search in the field more targeted, specific and effective. 
-The data set used for this analysis has been provided in Luke Barousse’s [SQL course](https://www.lukebarousse.com/sql). This Data includes details on job titles, salaries, location, and required skills. The course is heavily foccused on the US market, thus making the results not completly accurate to my reality, which is why I will be comparing some of the overall results to the canadian reality. 
+
+This project was a part of an SQL online class seeking to find a deeper understanding of the Data Analyst job requirements and benefits. It created a better understanding of the most in-demand skills and the pay related to said skills making my future job search in the field more targeted, specific and effective.
+The data set used for this analysis has been provided in Luke Barousse’s [SQL course](https://www.lukebarousse.com/sql). This Data includes details on job titles, salaries, location, and required skills. The course is heavily foccused on the US market, thus making the results not completly accurate to my reality, which is why I will be comparing some of the overall results to the canadian reality.
 The questions I wanted to answer through my SQL queries were:
+
 1. What are the top-paying data analyst jobs?
 2. What skills are required for these top-paying jobs?
 3. What skills are most in demand for data analysts?
 4. Which skills are associated with higher salaries?
 5. What are the most optimal skills to learn for a data analyst looking to maximize job market value?
+
 # Tools I used
+
 In this project, I used a variety of tools to conduct my analysis and to add visualizations to some part:
 
 1.**SQL**(Structured Query Language): Used to interact with the database, extract insights, and answer my key questions through queries.
 
-2.***PostgreSQL**: As the database management system, PostgreSQL allowed me to store, query, and manipulate the job posting data.
+2.**\*PostgreSQL**: As the database management system, PostgreSQL allowed me to store, query, and manipulate the job posting data.
 
 3.**Visual Studio Code**(VS Code):This open-source administration and development platform helped me manage the database and execute SQL queries.
 
-
 # The Analysis
+
 Each query for this project was done with the objective of finding specific aspects of the data analyst job market. Here is the approach for each question:
-### 1. Top Paying Data Analyst Jobs 
+
+### 1. Top Paying Data Analyst Jobs
+
 To identify the highest-paying roles, I filtered data analyst positions by average yearly salary and location, focusing on remote jobs. This query highlights the high paying opportunities in the field.
+
 ```SQL
 SELECT
     job_id,
@@ -35,52 +44,57 @@ SELECT
     job_posted_date
 
 FROM job_postings_fact
-WHERE 
+WHERE
     job_title_short = 'Data Analyst'
    AND salary_year_avg IS NOT NULL
    AND job_location = 'Anywhere'
 ORDER BY salary_year_avg DESC
 LIMIT 10;
 ```
+
 ### 2. Skills for top paying jobs
- **BLABLABLA**
+
+**BLABLABLA**
+
 ```SQL
 WITH top_paying_jobs AS (
-    SELECT 
+    SELECT
         job_id,
         job_title,
         salary_year_avg
     FROM job_postings_fact
-    WHERE 
-        job_title_short = 'Data Analyst' 
+    WHERE
+        job_title_short = 'Data Analyst'
         AND job_location = 'Anywhere'
-        AND salary_year_avg IS NOT NULL 
+        AND salary_year_avg IS NOT NULL
     ORDER BY salary_year_avg DESC
-    LIMIT 10      
+    LIMIT 10
 )
 
 SELECT
-    top_paying_jobs.job_id, 
-    job_title, 
+    top_paying_jobs.job_id,
+    job_title,
     salary_year_avg,
     skills_dim.skills
-FROM top_paying_jobs   
+FROM top_paying_jobs
 INNER JOIN skills_job_dim ON top_paying_jobs.job_id=skills_job_dim.job_id
 INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
-/* This join allows us to list the skills associated with each of these top-paying jobs. 
+/* This join allows us to list the skills associated with each of these top-paying jobs.
 We only want to include jobs where there’s a skill associated with it. */
-ORDER BY 
+ORDER BY
     salary_year_avg DESC;
 ```
 
 ### 3. In-Demand Skills for Data Analysts
- **BLABLABLA**
+
+**BLABLABLA**
+
 ```SQL
 SELECT
    skills_dim.skills,
    COUNT(skills_job_dim.job_id) AS demand_count
 FROM job_postings_fact
-INNER JOIN 
+INNER JOIN
     skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
 INNER JOIN
      skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
@@ -88,32 +102,35 @@ WHERE
     job_postings_fact.job_title_short= 'Data Analyst'
 GROUP BY
     skills_dim.skills
-ORDER BY     
+ORDER BY
 demand_count DESC
 LIMIT 5;
 ```
+
 ### Here are the Top 5 most demanded skills
 
-| Skill | Demand Count |
-|-------|--------------|
-| SQL | 92,628 |
-| Excel | 67,031 |
-| Python | 57,326 |
-| Tableau | 46,554 |
-| Power BI | 39,468 |
+| Skill    | Demand Count |
+| -------- | ------------ |
+| SQL      | 92,628       |
+| Excel    | 67,031       |
+| Python   | 57,326       |
+| Tableau  | 46,554       |
+| Power BI | 39,468       |
 
 ### 4. Skills based on Salary
+
 **BLABLABLA**
+
 ```SQL
 SELECT
     skills_dim.skills AS skill,
    ROUND(avg(job_postings_fact.salary_year_avg)) AS avg_salary
 FROM job_postings_fact
-    INNER JOIN 
+    INNER JOIN
         skills_job_dim ON job_postings_fact.job_id=skills_job_dim.job_id
-    INNER JOIN 
+    INNER JOIN
         skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
-WHERE 
+WHERE
     job_postings_fact.job_title_short='Data Analyst'
     AND job_postings_fact.salary_year_avg IS NOT NULL
 GROUP BY
@@ -122,40 +139,42 @@ ORDER BY
     avg_salary DESC
 Limit 10 ;
 ```
+
 ### Top 10 Highest Paying Skills
 
-| Rank | Skill | Average Salary |
-|------|-------|----------------|
-| 1 | SVN | $400,000 |
-| 2 | Solidity | $179,000 |
-| 3 | Couchbase | $160,515 |
-| 4 | DataRobot | $155,486 |
-| 5 | Golang | $155,000 |
-| 6 | MXNet | $149,000 |
-| 7 | dplyr | $147,633 |
-| 8 | VMware | $147,500 |
-| 9 | Terraform | $146,734 |
-| 10 | Twilio | $138,500 |
+| Rank | Skill     | Average Salary |
+| ---- | --------- | -------------- |
+| 1    | SVN       | $400,000       |
+| 2    | Solidity  | $179,000       |
+| 3    | Couchbase | $160,515       |
+| 4    | DataRobot | $155,486       |
+| 5    | Golang    | $155,000       |
+| 6    | MXNet     | $149,000       |
+| 7    | dplyr     | $147,633       |
+| 8    | VMware    | $147,500       |
+| 9    | Terraform | $146,734       |
+| 10   | Twilio    | $138,500       |
 
 ### 5. Most Optimal Skills to Learn
+
 ```SQL
 WITH skills_demand AS (
     SELECT
          skills_dim.skill_id,
          skills_dim.skills,
          COUNT(skills_job_dim.job_id) AS demand_count
-FROM 
+FROM
     job_postings_fact
-    INNER JOIN   
+    INNER JOIN
         skills_job_dim ON job_postings_fact.job_id=skills_job_dim.job_id
     INNER JOIN
         skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
 WHERE
-    job_postings_fact.job_title_short = 'Data Analyst'  
+    job_postings_fact.job_title_short = 'Data Analyst'
     AND job_postings_fact.salary_year_avg IS NOT NULL
-    AND job_postings_fact.job_work_from_home = True  
+    AND job_postings_fact.job_work_from_home = True
 GROUP BY
-    skills_dim.skill_id     
+    skills_dim.skill_id
 ),
 
 average_salary AS (
@@ -163,11 +182,11 @@ average_salary AS (
     skills_job_dim.skill_id,
    ROUND(avg(job_postings_fact.salary_year_avg)) AS avg_salary
 FROM job_postings_fact
-    INNER JOIN 
+    INNER JOIN
         skills_job_dim ON job_postings_fact.job_id=skills_job_dim.job_id
-    INNER JOIN 
+    INNER JOIN
         skills_dim ON skills_job_dim.skill_id=skills_dim.skill_id
-WHERE 
+WHERE
     job_postings_fact.job_title_short='Data Analyst'
     AND job_postings_fact.salary_year_avg IS NOT NULL
     AND job_postings_fact.job_work_from_home = TRUE
@@ -181,28 +200,30 @@ SELECT
     average_salary.avg_salary
 FROM
     skills_demand
-    INNER JOIN 
+    INNER JOIN
         average_salary ON skills_demand.skill_id=average_salary.skill_id
 ORDER BY
     demand_count DESC,
     avg_salary DESC
-LIMIT 10;   
+LIMIT 10;
 ```
+
 # Optimal Skills - High Demand & High Salary
 
-| Rank | Skill | Demand Count | Average Salary |
-|------|-------|--------------|----------------|
-| 1 | SQL | 398 | $97,237 |
-| 2 | Excel | 256 | $87,288 |
-| 3 | Python | 236 | $101,397 |
-| 4 | Tableau | 230 | $99,288 |
-| 5 | R | 148 | $100,499 |
-| 6 | Power BI | 110 | $97,431 |
-| 7 | SAS | 63 | $98,902 |
-| 8 | PowerPoint | 58 | $88,701 |
-| 9 | Looker | 49 | $103,795 |
+| Rank | Skill      | Demand Count | Average Salary |
+| ---- | ---------- | ------------ | -------------- |
+| 1    | SQL        | 398          | $97,237        |
+| 2    | Excel      | 256          | $87,288        |
+| 3    | Python     | 236          | $101,397       |
+| 4    | Tableau    | 230          | $99,288        |
+| 5    | R          | 148          | $100,499       |
+| 6    | Power BI   | 110          | $97,431        |
+| 7    | SAS        | 63           | $98,902        |
+| 8    | PowerPoint | 58           | $88,701        |
+| 9    | Looker     | 49           | $103,795       |
 
 # What I learned
-# Insights
-# Conclusion
 
+# Insights
+
+# Conclusion
