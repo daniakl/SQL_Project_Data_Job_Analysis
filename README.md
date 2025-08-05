@@ -52,6 +52,14 @@ ORDER BY salary_year_avg DESC
 LIMIT 10;
 ```
 
+Here is a chart visualization of the results found by the query.
+
+![chart visualization of the query for remote jobs](project_sql\Assets\chart_top_paying_jobs_.png)
+
+I also ran a updated query to find the Top Highest Paying Data Analyst Jobs in Cananda in 2023.
+
+![chart visualization of the query for canadian jobs](project_sql\Assets\chart_top_paying_jobs_canada.png)
+
 ### 2. Skills for top paying jobs
 
 **BLABLABLA**
@@ -85,6 +93,8 @@ ORDER BY
     salary_year_avg DESC;
 ```
 
+\*\* **ADD VISUALISATION** \*\*
+
 ### 3. In-Demand Skills for Data Analysts
 
 **BLABLABLA**
@@ -116,6 +126,8 @@ LIMIT 5;
 | Python   | 57,326       |
 | Tableau  | 46,554       |
 | Power BI | 39,468       |
+
+These skills were also the top 5 most in demand in Canada.
 
 ### 4. Skills based on Salary
 
