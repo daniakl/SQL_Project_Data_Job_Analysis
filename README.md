@@ -58,7 +58,7 @@ LIMIT 10;
 
 ### I also ran a updated query to find the Top Highest Paying Data Analyst Jobs in Cananda in 2023.
 
-![chart visualization of the query for canadian jobs](project_sql\Assets\chart_top_paying_jobs_canada.png)
+![chart visualization of the query for canadian jobs](project_sql/Assets/chart_top_paying_jobs_canada.png)
 
 ### 2. Skills for top paying jobs
 
@@ -93,11 +93,11 @@ ORDER BY
     salary_year_avg DESC;
 ```
 
-![Chart visualization of top-paying skills](project_sql\Assets\chart_top_paying_skills_.png)
+![Chart visualization of top-paying skills](project_sql/Assets/chart_top_paying_skills_.png)
 
 ### And for Canada:
 
-![Chart visualization of top-paying skills for canada](project_sql\Assets\chart_top_paying_skills_canada.png)
+![Chart visualization of top-paying skills for canada](project_sql/Assets/chart_top_paying_skills_canada.png)
 
 ### 3. In-Demand Skills for Data Analysts
 
