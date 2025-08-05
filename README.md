@@ -54,7 +54,7 @@ LIMIT 10;
 
 ### Here is a chart visualization of the results found by the query.
 
-![chart visualization of the query for remote jobs](project_sql\Assets\chart_top_paying_jobs_.png)
+![chart visualization of the query for remote jobs](project_sql/Assets/chart_top_paying_jobs_.png)
 
 ### I also ran a updated query to find the Top Highest Paying Data Analyst Jobs in Cananda in 2023.
 
