@@ -93,7 +93,7 @@ ORDER BY
     salary_year_avg DESC;
 ```
 
-\*\* **ADD VISUALISATION** \*\*
+![Chart visualization of top-paying skills]()
 
 ### 3. In-Demand Skills for Data Analysts
 
