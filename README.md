@@ -20,11 +20,10 @@ The questions I wanted to answer through my SQL queries were:
 
 In this project, I used a variety of tools to conduct my analysis and to add visualizations to some part:
 
-1.**SQL**(Structured Query Language): Used to interact with the database, extract insights, and answer my key questions through queries.
-
-2.**\*PostgreSQL**: As the database management system, PostgreSQL allowed me to store, query, and manipulate the job posting data.
-
-3.**Visual Studio Code**(VS Code):This open-source administration and development platform helped me manage the database and execute SQL queries.
+- **SQL**(Structured Query Language): Used to interact with the database, extract insights, and answer my key questions through queries.
+- **\*PostgreSQL**: As the database management system, PostgreSQL allowed me to store, query, and manipulate the job posting data.
+- **Visual Studio Code**(VS Code):This open-source administration and development platform helped me manage the database and execute SQL queries.
+- **Git and Github** : Used to create an online reposetary and share this project!
 
 # The Analysis
 
@@ -131,7 +130,7 @@ LIMIT 5;
 | Tableau  | 46,554       |
 | Power BI | 39,468       |
 
-These skills were also the top 5 most in demand in Canada.
+**These skills were also the top 5 most in demand in Canada.**
 
 ### 4. Skills based on Salary
 
@@ -170,6 +169,21 @@ Limit 10 ;
 | 8    | VMware    | $147,500       |
 | 9    | Terraform | $146,734       |
 | 10   | Twilio    | $138,500       |
+
+### Top Paying Skills in Canada
+
+| Rank | Skill      | Average Salary (USD) |
+| ---- | ---------- | -------------------- |
+| 1    | Looker     | $130,250             |
+| 2    | Snowflake  | $123,333             |
+| 3    | Redshift   | $120,000             |
+| 4    | TypeScript | $108,416             |
+| 5    | BigQuery   | $107,833             |
+| 6    | Spark      | $107,479             |
+| 7    | Hadoop     | $107,167             |
+| 8    | AWS        | $105,000             |
+| 9    | GCP        | $105,000             |
+| 10   | Azure      | $103,671             |
 
 ### 5. Most Optimal Skills to Learn
 
@@ -238,8 +252,37 @@ LIMIT 10;
 | 8    | PowerPoint | 58           | $88,701        |
 | 9    | Looker     | 49           | $103,795       |
 
+# Optimal Skills in Canada - High Demand & High Salary
+
+| Rank | Skill    | Demand Count | Average Salary (USD) |
+| ---- | -------- | ------------ | -------------------- |
+| 1    | SQL      | 17           | $97,237              |
+| 2    | Python   | 14           | $101,397             |
+| 3    | Tableau  | 10           | $99,288              |
+| 4    | Excel    | 9            | $87,288              |
+| 5    | Power BI | 5            | $97,431              |
+| 6    | Spark    | 4            | $99,077              |
+| 7    | SAS      | 4            | $98,902              |
+| 8    | VBA      | 4            | $88,783              |
+| 9    | Sheets   | 4            | $86,088              |
+
 # What I learned
 
+Throughout this project, I applied several SQL techniques and skills learned through Luke Barousse's online course:
+
+- **Complex query construction**:
+- **Data aggregation**:
+- **Analytical thinking**:
+- **Creating Readme files**:
+
 # Insights
+
+From this analysis, we could come to the following conclusions:
+
+1. **Top-Paying Data Analyst Jobs**: The highest-paying jobs for data analysts that allow remote work offer a wide range of salaries, the highest at $650,000!
+2. **Skills for Top-Paying Jobs**: High-paying data analyst jobs require advanced proficiency in SQL, suggesting it’s a critical skill for earning a top salary.
+3. **Most In-Demand Skills**: SQL is also the most demanded skill in the data analyst job market, thus making it essential for job seekers.
+4. **Skills with Higher Salaries**: Specialized skills, such as SVN and Solidity, are associated with the highest average salaries, indicating a premium on niche expertise.
+5. **Optimal Skills for Job Market Value**: SQL leads in demand and offers for a high average salary, positioning it as one of the most optimal skills for data analysts to learn to maximize their market value.
 
 # Conclusion
