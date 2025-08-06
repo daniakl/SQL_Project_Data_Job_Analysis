@@ -269,8 +269,8 @@ LIMIT 10;
 Throughout this project, I applied several SQL techniques and skills learned through Luke Barousse's online course:
 
 - **Complex query construction**: Learning to build complex SQL queries that combine tables, use subqueries, and use functions like **WITH** clauses to build temporary tables.
-- **Data aggregation**: Summarizing data effectively using aggregate functions like <span style="color:orange">**COUNT()**</span>
-  and <span style="color:orange">**AVG()**</span>, and using <span style="color:orange">**GROUP BY**</span>.
+- **Data aggregation**: Summarizing data effectively using aggregate functions like **COUNT()**
+  and **AVG()**, and using **GROUP BY**.
 - **Analytical thinking**: Developing analytical skills to answer questions and find insights by using SQL queries.
 - **Creating README files**: Learning the basics of Markdown language to create structured README files to share projects.
 
